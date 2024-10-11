@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Beautiful_Villa_API.Controllers
 {
+    [Route("api/VillaAPI")]
     [ApiController]
     public class VillaAPIController : ControllerBase
     {
+        [HttpGet]
         public IEnumerable<Villa> GetVillas() 
         {
             return new List<Villa>()
