@@ -9,9 +9,16 @@ namespace Beautiful_Villa_API.Controllers
     [ApiController]
     public class VillaAPIController : ControllerBase
     {
+        private readonly ILogging _logger;
+        public VillaAPIController(ILogging logger)
+        {
+            _logger = logger;
+        }
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<IEnumerable<VillaDTO>> GetVillas() 
         {
+            _logger.Log("Getting all villas","");
             return Ok(VillaStore.villaList);
         } 
         [HttpGet("{id:int}", Name ="GetVilla")]
@@ -21,6 +28,7 @@ namespace Beautiful_Villa_API.Controllers
         // [ProducesResponseType(200, Type =Tyoeof(VillaDTO))]
         public ActionResult<VillaDTO> GetVilla(int id) 
         {
+            _logger.Log("Get Villa Error with Id " + id,"error");
             if (id == 0)
             {
                 return BadRequest();
